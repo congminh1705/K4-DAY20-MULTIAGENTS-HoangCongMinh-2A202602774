@@ -4,6 +4,7 @@
 set -euo pipefail
 export PYTHONDONTWRITEBYTECODE=1
 export PYTHONWARNINGS=ignore
+export LAB_REQUESTS_PER_SECOND=0.18
 git rev-parse --verify freeze >/dev/null
 for condition in baseline subagents skills-auto; do
     if test -f "results/$condition/code-eval/run.json"; then

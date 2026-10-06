@@ -6,6 +6,7 @@ Chạy thật:   python -m lab.runner --condition baseline --tasks learn
 """
 import argparse
 import json
+import os
 import re
 import time
 from datetime import datetime, timezone
@@ -14,7 +15,9 @@ from pathlib import Path
 
 from langchain_core.messages import AIMessage, ToolMessage
 from langchain_core.callbacks import UsageMetadataCallbackHandler
+from langchain_core.rate_limiters import InMemoryRateLimiter
 from .agent import build_agent
+from .model import make_model
 
 from .grading import grade                                                      # có sẵn
 from .tasks import ROOT, get_task, hash_dir, list_tasks, prepare_sandbox         # có sẵn
@@ -87,6 +90,14 @@ def run_task(task_id: str, condition: str, results_dir="results", model=None, re
         record["skills_sha256"] = before
         start = time.perf_counter()
         try:
+            if model is None:
+                model = make_model()
+                requests_per_second = float(os.getenv("LAB_REQUESTS_PER_SECOND", "0"))
+                if requests_per_second > 0:
+                    model.rate_limiter = InMemoryRateLimiter(
+                        requests_per_second=requests_per_second,
+                        check_every_n_seconds=0.1, max_bucket_size=1,
+                    )
             agent = build_agent(sandbox, mode=cfg["mode"], use_skills=skills_dir is not None, model=model)
             for result in agent.stream(
                 {"messages": [{"role": "user", "content": task.instruction}]},

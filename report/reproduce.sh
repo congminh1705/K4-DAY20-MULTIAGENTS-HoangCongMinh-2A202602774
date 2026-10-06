@@ -3,6 +3,7 @@
 set -euo pipefail
 export PYTHONDONTWRITEBYTECODE=1
 export PYTHONWARNINGS=ignore
+export LAB_REQUESTS_PER_SECOND=0.18
 python -m pytest
 python scripts/tour.py > report/tour.txt
 python -m lab.runner --condition baseline --tasks learn
