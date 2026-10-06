@@ -168,6 +168,8 @@ def build():
     all_runs = [r for rows in runs.values() for r in rows] + dev
     archived_count = len(list((ROOT / "results/infrastructure-errors").rglob("run.json")))
     text.append(f"Số bản ghi chính thức/development đã giữ: {len(all_runs)}; bản API lỗi lưu riêng: {archived_count}; bonus lặp bổ sung: {bonus_count}. Ngoài các bản ghi này có một tác vụ log đang chạy bị dừng khi hết quota ngày, chưa có run.json nên không đo được đầy đủ token của lượt đó. Curator có 2 lần gọi model, tour và 10 ca red-team dùng model giả. Không suy ra tổng token toàn phiên chỉ từ các run.json. Nội dung báo cáo được tổng hợp bằng python report/build_report.py.\n")
+    text += ["### Thông tin nộp bài\n",
+             "Kho bài nộp: https://github.com/congminh1705/K4-DAY20-MULTIAGENTS-HoangCongMinh-2A202602774, nhánh main. Mã nguồn và kết quả thí nghiệm đã được đẩy ở commit c14bc9c; tag freeze trỏ tới 01798de. Commit báo cáo cuối dùng tên `part 6: final report` theo yêu cầu bổ sung của đề bài.\n"]
     rendered = "\n".join(line.rstrip() for line in "\n".join(text).splitlines()) + "\n"
     (ROOT / "report/REPORT.md").write_text(rendered, encoding="utf-8")
 

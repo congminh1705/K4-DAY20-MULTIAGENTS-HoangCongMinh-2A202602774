@@ -170,3 +170,7 @@ Hạn chế: chỉ kiểm tra một marker và biến đổi ký tự đã biế
 Hướng 6e ban đầu được hoãn do quota; không có lượt lặp evaluation bổ sung và không tuyên bố đã đo khoảng dao động. Lab chỉ yêu cầu chọn một hướng bonus: 6c đã được thực hiện. Lệnh tùy chọn nếu muốn mở rộng sau này: python report/resume_experiments.py --bonus-6e.
 
 Số bản ghi chính thức/development đã giữ: 21; bản API lỗi lưu riêng: 2; bonus lặp bổ sung: 0. Ngoài các bản ghi này có một tác vụ log đang chạy bị dừng khi hết quota ngày, chưa có run.json nên không đo được đầy đủ token của lượt đó. Curator có 2 lần gọi model, tour và 10 ca red-team dùng model giả. Không suy ra tổng token toàn phiên chỉ từ các run.json. Nội dung báo cáo được tổng hợp bằng python report/build_report.py.
+
+### Thông tin nộp bài
+
+Kho bài nộp: https://github.com/congminh1705/K4-DAY20-MULTIAGENTS-HoangCongMinh-2A202602774, nhánh main. Mã nguồn và kết quả thí nghiệm đã được đẩy ở commit c14bc9c; tag freeze trỏ tới 01798de. Commit báo cáo cuối dùng tên `part 6: final report` theo yêu cầu bổ sung của đề bài.
